@@ -9,6 +9,7 @@ This is a prototype project built with React, Vite, TypeScript, and Tailwind CSS
 - **UI components:** shadcn/ui (available, not required — use when a standard component is needed)
 - **Animation:** Motion (motion.dev) — import from `motion/react`
 - **Icons:** Lucide React (default, but any icon source is fine if asked)
+- **Config panels:** DialKit — floating control panel for tweaking UI values at runtime
 
 ## Commands
 
@@ -50,6 +51,20 @@ Build interactive prototypes that look and feel real. The designer will describe
 - Every state change, transition, and interaction should feel smooth and intentional.
 - Use appropriate easing — avoid linear timing for UI motion. Springs and ease-out curves feel more natural.
 - Keep animations quick. Most UI transitions should be 150-300ms. Don't make people wait.
+
+### Config menus (DialKit)
+- When asked to add a config menu, control panel, or tweakable settings to a prototype, use DialKit.
+- `DialRoot` is already mounted in main.tsx. Just use the `useDialKit` hook in any component:
+  ```tsx
+  import { useDialKit } from 'dialkit'
+
+  const params = useDialKit('ComponentName', {
+    blur: [24, 0, 100],    // [default, min, max] → slider
+    color: '#ff5500',       // → color picker
+    visible: true,          // → toggle
+  })
+  ```
+- The hook returns a reactive object — use `params.blur`, `params.color`, etc. directly in your JSX/styles.
 
 ### Styling
 - Use Tailwind classes directly. Don't create CSS files unless there's a specific reason.
